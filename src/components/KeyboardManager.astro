@@ -1,10 +1,31 @@
----
-
----
 <footer>
-
+    <ninja-keys
+    placeholder="Insertar comando"
+    > </ninja-keys>
 </footer>
 
-<style>
+<script>
+    import "ninja-keys";
+    const ninja = document.querySelector("ninja-keys");
+    if (ninja !== null) {
+        ninja.data = [
+            {
+                id: "print",
+                title: "🖨 Imprimir curriculum",
+                hotkey: "ctrl+p",
+                section: "Projects",
+                handler: () => {
+                    window.print();
+                },
+            },
+        ];
+    }
+</script>
 
+<style>
+    @media print {
+        ninja-keys {
+            display: none;
+        }
+    }
 </style>

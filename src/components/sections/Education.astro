@@ -1,5 +1,89 @@
 ---
 import Section from "@/components/Section.astro";
+import {education} from "@cv";
 ---
 <Section title="Educacion">
-<h2>Education</h2>
+<article>
+<ul>
+    {
+        education.map(({institution, url, area, startDate, endDate }) => {
+            const startYear = new Date(startDate).getFullYear();
+            const endYear = endDate != null ? new Date(endDate).getFullYear() : "Actualidad";
+            return (
+                <article>
+                <header>
+                    <div>
+                    <h3>
+                        <a 
+                            href={url} 
+                            title={`Ver ${institution}`} target="_blank"> {institution}
+                        </a>
+                    </h3>
+                    <h4>{area}</h4>
+                </div>
+                    <div>
+                        <time 
+                            datetime={startDate}
+                            data-title={startDate}>{startYear}
+                        </time>
+                        -
+                        <time 
+                            datetime={startDate}
+                            data-title={startDate}>{endYear}
+                        </time>
+                    </div>
+                </header>
+            </article>
+            )
+
+        })
+    }
+</ul>
+</article>
+</Section>
+
+<style>
+    ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  article h3 {
+    font-weight: 500;
+    color: #111;
+  }
+
+  article a {
+    color: #111;
+  }
+
+  article a:hover {
+    text-decoration: underline;
+  }
+
+  article h4 {
+    color: #222;
+    font-weight: 400;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  time {
+    color: #555;
+    font-size: 0.85rem;
+    min-width: 102px;
+    cursor: default;
+  }
+
+  @media (width <= 700px) {
+    time {
+      text-align: right;
+    }
+  }
+</style>
